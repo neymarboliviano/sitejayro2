@@ -1,1 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Sports Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="app-header" id="appHeader">
+        <div class="header-top">
+            <div class="logo-area">
+                <svg class="logo-icon" viewBox="0 0 48 48" width="40" height="40">
+                    <rect x="4" y="20" width="8" height="22" rx="2" fill="#0080ff" />
+                    <rect x="16" y="10" width="8" height="32" rx="2" fill="#0080ff" />
+                    <rect x="28" y="16" width="8" height="26" rx="2" fill="#0080ff" />
+                    <rect x="40" y="4" width="4" height="38" rx="2" fill="#0080ff" />
+                </svg>
+                <span class="logo-text">URBAN SPORTS</span>
+            </div>
+            <nav class="main-nav" id="mainNav">
+                <button class="nav-btn active" data-route="home" data-key="nav_home">Home</button>
+                <button class="nav-btn" data-route="catalog" data-key="nav_catalog">Catalog</button>
+                <button class="nav-btn" data-route="lab" data-key="nav_lab">Lab</button>
+                <button class="nav-btn" data-route="community" data-key="nav_community">Community</button>
+                <button class="nav-btn" data-route="portal" data-key="nav_portal">Portal</button>
+                <button class="nav-btn" data-route="analytics" data-key="nav_analytics">Analytics</button>
+            </nav>
+            <div class="header-actions">
+                <button class="icon-btn lang-toggle" id="langToggle" title="Toggle Language">EN|PT</button>
+                <button class="icon-btn theme-toggle" id="themeToggle" title="Toggle Theme">
+                    <span class="theme-icon-light">&#9728;</span>
+                    <span class="theme-icon-dark">&#9790;</span>
+                </button>
+                <button class="icon-btn wishlist-btn" id="wishlistBtn" title="Wishlist">
+                    <span class="wishlist-count" id="wishlistCount">0</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+                <button class="icon-btn cart-btn" id="cartBtn" title="Cart">
+                    <span class="cart-count" id="cartCount">0</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                </button>
+            </div>
+        </div>
+        <div class="header-search-bar">
+            <input type="text" class="search-input" id="globalSearch" placeholder="Search products..." data-key-placeholder="search_placeholder">
+            <button class="search-btn" id="searchBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+        </div>
+    </header>
 
+    <main class="app-main" id="appMain">
+        <div class="views-container" id="viewsContainer">
+
+            <section class="view home-view active" data-view="home">
+                <div class="view-inner">
+                    <div class="banner-carousel" id="bannerCarousel">
+                        <div class="banner-slide active">
+                            <div class="banner-content">
+                                <h2 data-key="banner_title_1">Summer Sale - Up to 40% Off</h2>
+                                <p data-key="banner_desc_1">Premium sportswear at unbeatable prices</p>
+                                <button class="cta-btn" data-key="banner_cta">Shop Now</button>
+                            </div>
+                        </div>
+                        <div class="banner-slide">
+                            <div class="banner-content">
+                                <h2 data-key="banner_title_2">New Collection Arrived</h2>
+                                <p data-key="banner_desc_2">Discover the latest in fitness fashion</p>
+                                <button class="cta-btn" data-key="banner_cta">Shop Now</button>
+                            </div>
+                        </div>
+                        <div class="banner-dots" id="bannerDots"></div>
+                    </div>
+                    <div class="stock-scarcity-bar" id="scarcityBar">
+                        <div class="scarcity-item">
+                            <span class="scarcity-label" data-key="scarcity_label">Limited Stock Alert</span>
+                            <div class="scarcity-progress"><div class="scarcity-fill" style="width:23%"></div></div>
+                            <span class="scarcity-percent">23%</span>
+                        </div>
+                    </div>
+                    <div class="mission-panel" id="missionPanel">
+                        <h3 data-key="missions_title">Fitness Missions</h3>
+                        <div class="mission-list" id="missionList"></div>
+                        <div class="reward-points-display">
+                            <span data-key="reward_points">Reward Points</span>: <strong id="rewardPointsDisplay">0</strong>
+                        </div>
+                    </div>
+                    <div class="recommendations-strip" id="recommendationsStrip">
+                        <h3 data-key="rec_title">Recommended For You</h3>
+                        <div class="rec-cards" id="recCards"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="view catalog-view" data-view="catalog">
+                <div class="view-inner">
+                    <div class="catalog-controls">
+                        <div class="filter-group">
+                            <input type="text" class="filter-search" id="catalogSearch" placeholder="Filter products..." data-key-placeholder="search_placeholder">
+                            <select class="filter-select" id="categoryFilter">
+                                <option value="all" data-key="cat_all">All Categories</option>
+                                <option value="apparel" data-key="cat_apparel">Apparel</option>
+                                <option value="equipment" data-key="cat_equipment">Equipment</option>
+                                <option value="accessories" data-key="cat_accessories">Accessories</option>
+                            </select>
+                            <select class="filter-select" id="sortFilter">
+                                <option value="default" data-key="sort_default">Default</option>
+                                <option value="price-asc" data-key="sort_asc">Price: Low to High</option>
+                                <option value="price-desc" data-key="sort_desc">Price: High to Low</option>
+                                <option value="name" data-key="sort_name">Name</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="catalog-grid" id="catalogGrid"></div>
+                    <div class="skeleton-grid" id="skeletonGrid" style="display:none;">
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="view detail-view" data-view="detail">
+                <div class="view-inner" id="detailContent"></div>
+            </section>
+
+            <section class="view portal-view" data-view="portal">
+                <div class="view-inner">
+                    <div class="portal-tabs">
+                        <button class="portal-tab active" data-portal-tab="login" data-key="portal_login">Login</button>
+                        <button class="portal-tab" data-portal-tab="register" data-key="portal_register">Register</button>
+                        <button class="portal-tab" data-portal-tab="profile" data-key="portal_profile">Profile</button>
+                    </div>
+                    <div class="portal-content" id="portalContent">
+                        <form class="portal-form active" id="loginForm" data-portal-form="login">
+                            <h3 data-key="login_title">Access Your Account</h3>
+                            <input type="email" placeholder="Email" required data-key-placeholder="email_placeholder">
+                            <input type="password" placeholder="Password" required data-key-placeholder="password_placeholder">
+                            <button type="submit" class="cta-btn" data-key="login_btn">Sign In</button>
+                        </form>
+                        <form class="portal-form" id="registerForm" data-portal-form="register">
+                            <h3 data-key="register_title">Create Account</h3>
+                            <input type="text" placeholder="Full Name" required data-key-placeholder="name_placeholder">
+                            <input type="email" placeholder="Email" required data-key-placeholder="email_placeholder">
+                            <input type="password" placeholder="Password" required data-key-placeholder="password_placeholder">
+                            <input type="password" placeholder="Confirm Password" required data-key-placeholder="confirm_password_placeholder">
+                            <button type="submit" class="cta-btn" data-key="register_btn">Sign Up</button>
+                        </form>
+                        <div class="portal-form" data-portal-form="profile">
+                            <h3 data-key="profile_title">Your Profile</h3>
+                            <div class="profile-info" id="profileInfo">
+                                <p><span data-key="profile_name">Name</span>: <strong id="profileName">-</strong></p>
+                                <p><span data-key="profile_email">Email</span>: <strong id="profileEmail">-</strong></p>
+                                <p><span data-key="profile_points">Points</span>: <strong id="profilePoints">0</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="view lab-view" data-view="lab">
+                <div class="view-inner">
+                    <div class="lab-grid">
+                        <div class="lab-card" id="labStyleRecommender">
+                            <h3 data-key="lab_style">AI Style Recommender</h3>
+                            <select class="lab-select" id="fitnessGoal">
+                                <option value="" data-key="goal_default">Select Goal</option>
+                                <option value="weightloss" data-key="goal_wl">Weight Loss</option>
+                                <option value="muscle" data-key="goal_muscle">Muscle Gain</option>
+                                <option value="endurance" data-key="goal_endurance">Endurance</option>
+                            </select>
+                            <select class="lab-select" id="fitnessFrequency">
+                                <option value="" data-key="freq_default">Weekly Frequency</option>
+                                <option value="2">2x per week</option>
+                                <option value="3">3x per week</option>
+                                <option value="5">5x per week</option>
+                            </select>
+                            <select class="lab-select" id="stylePreference">
+                                <option value="" data-key="style_default">Style Preference</option>
+                                <option value="casual" data-key="style_casual">Casual</option>
+                                <option value="bold" data-key="style_bold">Bold</option>
+                                <option value="minimal" data-key="style_minimal">Minimal</option>
+                            </select>
+                            <button class="cta-btn lab-btn" id="getRecommendation" data-key="lab_get_rec">Get Recommendations</button>
+                            <div class="lab-result" id="labRecResult"></div>
+                        </div>
+                        <div class="lab-card" id="labVirtualTryOn">
+                            <h3 data-key="lab_virtual">Virtual Try-On</h3>
+                            <div class="tryon-selectors">
+                                <select class="lab-select" id="tryonTop">
+                                    <option value="" data-key="tryon_top">Top</option>
+                                </select>
+                                <select class="lab-select" id="tryonBottom">
+                                    <option value="" data-key="tryon_bottom">Bottom</option>
+                                </select>
+                                <select class="lab-select" id="tryonShoes">
+                                    <option value="" data-key="tryon_shoes">Shoes</option>
+                                </select>
+                            </div>
+                            <div class="tryon-preview" id="tryonPreview">
+                                <div class="tryon-mannequin">
+                                    <div class="tryon-top-zone" id="tryonTopZone"></div>
+                                    <div class="tryon-bottom-zone" id="tryonBottomZone"></div>
+                                    <div class="tryon-shoes-zone" id="tryonShoesZone"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lab-card" id="labLookComposer">
+                            <h3 data-key="lab_composer">Look Composer</h3>
+                            <div class="composer-slots" id="composerSlots">
+                                <div class="composer-slot" data-slot="0">+</div>
+                                <div class="composer-slot" data-slot="1">+</div>
+                                <div class="composer-slot" data-slot="2">+</div>
+                            </div>
+                            <div class="composer-total" id="composerTotal">
+                                <span data-key="composer_total">Total</span>: <strong id="composerPrice">$0.00</strong>
+                                <span class="composer-discount" id="composerDiscount"></span>
+                            </div>
+                        </div>
+                        <div class="lab-card" id="labQuiz">
+                            <h3 data-key="lab_quiz">Fitness Quiz</h3>
+                            <div class="quiz-step" id="quizStep1">
+                                <p data-key="quiz_q1">What is your primary goal?</p>
+                                <button class="quiz-opt" data-quiz-answer="weightloss">Weight Loss</button>
+                                <button class="quiz-opt" data-quiz-answer="muscle">Muscle Gain</button>
+                                <button class="quiz-opt" data-quiz-answer="flexibility">Flexibility</button>
+                            </div>
+                            <div class="quiz-step" id="quizStep2" style="display:none;">
+                                <p data-key="quiz_q2">How often do you train?</p>
+                                <button class="quiz-opt" data-quiz-answer="rarely">1-2x/week</button>
+                                <button class="quiz-opt" data-quiz-answer="regularly">3-4x/week</button>
+                                <button class="quiz-opt" data-quiz-answer="intensely">5+x/week</button>
+                            </div>
+                            <div class="quiz-result" id="quizResult" style="display:none;"></div>
+                        </div>
+                        <div class="lab-card" id="labBMI">
+                            <h3 data-key="lab_bmi">BMI Calculator</h3>
+                            <input type="number" class="lab-input" id="bmiHeight" placeholder="Height (cm)" data-key-placeholder="height_placeholder">
+                            <input type="number" class="lab-input" id="bmiWeight" placeholder="Weight (kg)" data-key-placeholder="weight_placeholder">
+                            <button class="cta-btn lab-btn" id="calcBMI" data-key="lab_calc_bmi">Calculate</button>
+                            <div class="lab-result" id="bmiResult"></div>
+                        </div>
+                        <div class="lab-card" id="labSustainability">
+                            <h3 data-key="lab_sustainability">Sustainability Panel</h3>
+                            <div class="sustainability-stats">
+                                <div class="sust-stat"><span data-key="sust_carbon">Carbon Offset</span>: <strong>1,247 kg</strong></div>
+                                <div class="sust-stat"><span data-key="sust_recycled">Recycled Packaging</span>: <strong>89%</strong></div>
+                                <div class="sust-stat"><span data-key="sust_plastic">Plastic Saved</span>: <strong>342 kg</strong></div>
+                            </div>
+                        </div>
+                        <div class="lab-card" id="labVault">
+                            <h3 data-key="lab_vault">Achievement Vault</h3>
+                            <div class="vault-medals" id="vaultMedals"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="view community-view" data-view="community">
+                <div class="view-inner">
+                    <div class="community-feed" id="communityFeed">
+                        <h3 data-key="comm_feed">Community Feed</h3>
+                        <div class="post-composer">
+                            <textarea placeholder="Share your workout..." data-key-placeholder="post_placeholder" id="newPostText"></textarea>
+                            <button class="cta-btn" id="publishPost" data-key="comm_publish">Publish</button>
+                        </div>
+                        <div class="posts-list" id="postsList"></div>
+                    </div>
+                    <aside class="community-sidebar">
+                        <div class="weekly-ranking">
+                            <h3 data-key="comm_ranking">Weekly Ranking</h3>
+                            <ol id="rankingList"></ol>
+                        </div>
+                        <div class="look-of-week">
+                            <h3 data-key="comm_look">Look of the Week</h3>
+                            <div class="lotw-display" id="lotwDisplay"></div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+
+            <section class="view analytics-view" data-view="analytics">
+                <div class="view-inner">
+                    <h2 data-key="analytics_title">Corporate Analytics Dashboard</h2>
+                    <div class="analytics-grid">
+                        <div class="analytic-card"><span data-key="an_total_sales">Total Sales</span><strong>$847,290</strong></div>
+                        <div class="analytic-card"><span data-key="an_growth">Monthly Growth</span><strong>+18.4%</strong></div>
+                        <div class="analytic-card"><span data-key="an_most_viewed">Most Viewed</span><strong>Urban Pro Leggings</strong></div>
+                        <div class="analytic-card"><span data-key="an_most_fav">Most Favorited</span><strong>Tech Shaker 500</strong></div>
+                        <div class="analytic-card"><span data-key="an_sales_rank">Top Seller</span><strong>Performance Sneaker</strong></div>
+                        <div class="analytic-card"><span data-key="an_reviews">Review Trend</span><strong>4.7 / 5.0</strong></div>
+                        <div class="analytic-card"><span data-key="an_stock">Stock Control</span><strong>92% Available</strong></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="comparison-tray" id="comparisonTray" style="display:none;">
+        <div class="tray-header">
+            <span data-key="compare_tray">Compare Products</span>
+            <span class="tray-count" id="trayCount">0/3</span>
+        </div>
+        <div class="tray-items" id="trayItems"></div>
+        <button class="cta-btn compare-btn" id="compareBtn" data-key="compare_now">Compare Now</button>
+        <button class="tray-close" id="trayClose">&times;</button>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay" style="display:none;">
+        <div class="modal-content" id="modalContent"></div>
+    </div>
+
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-sidebar-header">
+            <h3 data-key="cart_title">Shopping Cart</h3>
+            <button class="cart-close" id="cartClose">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-footer">
+            <div class="cart-total"><span data-key="cart_total">Total</span>: <strong id="cartTotal">$0.00</strong></div>
+            <button class="cta-btn" data-key="cart_checkout">Checkout</button>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cartOverlay" style="display:none;"></div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
